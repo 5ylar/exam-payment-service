@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+    payment_server:
+        container_name: payment_server
+        build:
+            context: .
+            args:
+            - ENTRYPOINT=payment-server/main.go
+        environment: 
+            - PORT=8080
+            - OMISE_PUBLIC_KEY=!!!!!!!!CHANGE_ME!!!!!!!!
+            - OMISE_SECRET_KEY=!!!!!!!!CHANGE_ME!!!!!!!!
+        ports:
+            - 8080:8080
+    payment_server_ngrok_tunnel:
+        container_name: payment_server_ngrok_tunnel
+        image: wernight/ngrok
+        command: ngrok http payment_server:8080
+        ports:
+            - 4040:4040
+
