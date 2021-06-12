@@ -7,7 +7,7 @@ The service can:
 - record transactions status 
 - query for a transaction status 
 
-## Prerequisites
+## Deployment steps - On Docker
 - Receive Public key and Secret key at https://dashboard.omise.co/test/keys
 then update in docker-compose.yml ( OMISE_PUBLIC_KEY, OMISE_SECRET_KEY )
 - Run command 
@@ -69,4 +69,118 @@ Example for response payloads
 - Webhook from Omise service
 ```
 POST /webhook/omise
+```
+
+Example for request payloads
+
+```json
+{
+  "object": "event",
+  "id": "evnt_test_xxxxxxxx",
+  "livemode": false,
+  "location": "/events/evnt_test_xxxxxxxx",
+  "webhook_deliveries": [
+    {
+      "object": "webhook_delivery",
+      "id": "whdl_test_xxxxxxxx",
+      "uri": "https://omise-flask-example.herokuapp.com/webhook",
+      "status": 200
+    }
+  ],
+  "data": {
+    "object": "charge",
+    "id": "chrg_test_xxxxxxxx",
+    "location": "/charges/chrg_test_xxxxxxxx",
+    "amount": 12345,
+    "net": 11862,
+    "fee": 451,
+    "fee_vat": 32,
+    "interest": 0,
+    "interest_vat": 0,
+    "funding_amount": 12345,
+    "refunded_amount": 0,
+    "authorized": true,
+    "capturable": false,
+    "capture": true,
+    "disputable": true,
+    "livemode": false,
+    "refundable": true,
+    "reversed": false,
+    "reversible": false,
+    "voided": false,
+    "paid": true,
+    "expired": false,
+    "platform_fee": {
+      "fixed": null,
+      "amount": null,
+      "percentage": null
+    },
+    "currency": "THB",
+    "funding_currency": "THB",
+    "ip": "203.0.113.1",
+    "refunds": {
+      "object": "list",
+      "data": [],
+      "limit": 20,
+      "offset": 0,
+      "total": 0,
+      "location": "/charges/chrg_test_xxxxxxxx/refunds",
+      "order": "chronological",
+      "from": "1970-01-01T00:00:00Z",
+      "to": "2019-12-31T12:59:59Z"
+    },
+    "link": null,
+    "description": null,
+    "metadata": {
+      "order_id": "P26042018-01",
+      "color": "pink"
+    },
+    "card": {
+      "object": "card",
+      "id": "card_test_xxxxxxxx",
+      "livemode": false,
+      "location": null,
+      "deleted": false,
+      "street1": "1448/4 Praditmanutham Road",
+      "street2": null,
+      "city": "Bangkok",
+      "state": null,
+      "phone_number": "0123456789",
+      "postal_code": "10320",
+      "country": "th",
+      "financing": "credit",
+      "bank": "Bank of the Unbanked",
+      "brand": "Visa",
+      "fingerprint": "XjOdjaoHRvUGRfmZacMPcJtm0U3SEIIfkA7534dQeVw=",
+      "first_digits": null,
+      "last_digits": "4242",
+      "name": "Somchai Prasert",
+      "expiration_month": 12,
+      "expiration_year": 2022,
+      "security_code_check": true,
+      "created_at": "2019-12-31T12:59:59Z"
+    },
+    "source": null,
+    "schedule": null,
+    "customer": null,
+    "dispute": null,
+    "transaction": "trxn_test_xxxxxxxx",
+    "failure_code": null,
+    "failure_message": null,
+    "status": "successful",
+    "authorize_uri": "https://api.omise.co/payments/paym_test_xxxxxxxx/authorize",
+    "return_uri": "https://www.example.com/orders/54321/complete",
+    "created_at": "2019-12-31T12:59:59Z",
+    "paid_at": "2019-12-31T12:59:59Z",
+    "expires_at": "2019-12-31T12:59:59Z",
+    "expired_at": null,
+    "reversed_at": null,
+    "zero_interest_installments": true,
+    "branch": null,
+    "terminal": null,
+    "device": null
+  },
+  "key": "charge.create",
+  "created_at": "2019-12-31T12:59:59Z"
+}
 ```
