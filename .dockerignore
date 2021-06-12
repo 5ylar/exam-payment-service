@@ -1,0 +1,7 @@
+Dockerfile
+docker-compose.yml
+*.env
+README.md
+.vscode/
+payment.db
+.gitignore
